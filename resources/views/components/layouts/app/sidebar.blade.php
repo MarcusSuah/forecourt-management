@@ -14,13 +14,22 @@
         </a>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('Platform')" class="grid">
+            <flux:navlist.group :heading="__('Admin Dashboard')" class="grid">
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
             </flux:navlist.group>
 
             <flux:navlist.item icon="user-group" :href="route('admin.users.index')"
                 :current="request()->routeIs('admin.users.index')" wire:navigate>{{ __('Users') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="users" :href="route('admin.dealers.index')"
+                :current="request()->routeIs('admin.dealers.index')" wire:navigate>{{ __('Dealers') }}
+            </flux:navlist.item>
+
+
+                  <flux:navlist.item icon="home-modern" :href="route('admin.stations.index')"
+                :current="request()->routeIs('admin.stations.index')" wire:navigate>{{ __('Service Stations') }}
             </flux:navlist.item>
 
 
