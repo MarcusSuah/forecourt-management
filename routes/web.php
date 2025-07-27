@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Admin\Products\ProductIndex;
+use App\Livewire\Admin\Users\UserManager;
+
+
+
+
 
 //normal
 Route::get('/', function () {
@@ -28,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.')
         ->group(function () {
             Route::get('/products', ProductIndex::class)->name('products.index');
+             Route::get('/users', UserManager::class)->name('users.index');
         });
 });
 

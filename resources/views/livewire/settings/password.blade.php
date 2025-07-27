@@ -42,36 +42,22 @@ new class extends Component {
 
     <x-settings.layout :heading="__('Update password')" :subheading="__('Ensure your account is using a long, random password to stay secure')">
         <form wire:submit="updatePassword" class="mt-6 space-y-6">
-            <flux:input
-                wire:model="current_password"
-                :label="__('Current password')"
-                type="password"
-                required
-                autocomplete="current-password"
-            />
-            <flux:input
-                wire:model="password"
-                :label="__('New password')"
-                type="password"
-                required
-                autocomplete="new-password"
-            />
-            <flux:input
-                wire:model="password_confirmation"
-                :label="__('Confirm Password')"
-                type="password"
-                required
-                autocomplete="new-password"
-            />
+            <flux:input wire:model="current_password" :label="__('Current password')" type="password" required
+                autocomplete="current-password" />
+            <flux:input wire:model="password" :label="__('New password')" type="password" required
+                autocomplete="new-password" />
+            <flux:input wire:model="password_confirmation" :label="__('Confirm Password')" type="password" required
+                autocomplete="new-password" />
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
+                    <flux:button variant="primary" type="submit" class="w-full dark:bg-fuchsia-500">{{ __('Save') }}
+                    </flux:button>
                 </div>
 
-                <x-action-message class="me-3" on="password-updated">
-                    {{ __('Saved.') }}
-                </x-action-message>
+                <x-toast class="me-3" on="password-updated">
+                    {{ __('Password Updated Successfully.') }}
+                </x-toast>
             </div>
         </form>
     </x-settings.layout>

@@ -1,28 +1,16 @@
 <div>
 
-    {{-- @if (session()->has('message'))
-        <flux:text class="mb-4 font-medium !text-green-600 dark:!text-green-400">
-            {{ session('message') }}
-        </flux:text>
-    @endif --}}
 
     @if (session()->has('message'))
-    <div
-        x-data="{ show: true }"
-        x-init="setTimeout(() => show = false, 4000)"
-        x-show="show"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 translate-y-2"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-2"
-        class="fixed bottom-4 right-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-green-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
-        role="alert"
-    >
-        {{ session('message') }}
-    </div>
-@endif
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
+            class="fixed bottom-4 right-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-green-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
+            role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
 
 
 
@@ -118,21 +106,24 @@
         @if ($isOpen)
             <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-lg">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-600">
                         {{ $isEdit ? 'Edit Product' : 'Create Product' }}
                     </h2>
                     <form wire:submit.prevent="save">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1">Product Name</label>
+                            <label class="block text-sm font-medium mb-2 text-gray-800 dark:text-gray-600">Product
+                                Name</label>
                             <input wire:model="name" type="text"
-                                class="w-full border rounded px-3 py-2 focus:outline-blue-500" />
+                                class="w-full text-gray-600 dark:text-gray-900 border rounded px-3 py-2 focus:outline-blue-500" />
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1">Product Detail</label>
-                            <textarea wire:model="detail" class="w-full border rounded px-3 py-2 focus:outline-blue-500"></textarea>
+                            <label class="block text-sm font-medium mb-2 text-gray-800 dark:text-gray-600">Product
+                                Detail</label>
+                            <textarea wire:model="detail"
+                                class="w-full border text-gray-600 dark:text-gray-900 rounded px-3 py-2 focus:outline-blue-500"></textarea>
                             @error('detail')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
