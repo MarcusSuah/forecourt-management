@@ -133,9 +133,80 @@
                     </p>
                 </div>
             </div>
+
+
+            <div
+                class="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+                <!-- Icon -->
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-cyan-600 dark:bg-cyan-900 dark:text-red-300">
+                    <!-- Box icon (Heroicons - outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4m16 0l-8 8m8-8l-8-8" />
+                    </svg>
+                </div>
+
+                <!-- Text Content -->
+                <div>
+                    <h3 class="text-sm text-gray-500 dark:text-gray-400">Totoal Service Stations</h3>
+                    <p class="text-2xl font-bold text-red-500 dark:text-red-400">
+                        {{ \App\Models\ServiceStation::count() }}
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-300"> Stations</span>
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div
+                class="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+                <!-- Icon -->
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-cyan-600 dark:bg-cyan-900 dark:text-red-300">
+                    <!-- Box icon (Heroicons - outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4m16 0l-8 8m8-8l-8-8" />
+                    </svg>
+                </div>
+
+                <!-- Text Content -->
+                <div>
+                    <h3 class="text-sm text-gray-500 dark:text-gray-400">Number of Shifts</h3>
+                    <p class="text-2xl font-bold text-red-500 dark:text-red-400">
+                        {{ \App\Models\Shift::count() }}
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-300"> Shifts</span>
+                    </p>
+                </div>
+            </div>
+
+
+            <div
+                class="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+                <!-- Icon -->
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-cyan-600 dark:bg-cyan-900 dark:text-red-300">
+                    <!-- Box icon (Heroicons - outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4m16 0l-8 8m8-8l-8-8" />
+                    </svg>
+                </div>
+
+                <!-- Text Content -->
+                <div>
+                    <h3 class="text-sm text-gray-500 dark:text-gray-400">Total Employees</h3>
+                    <p class="text-2xl font-bold text-red-500 dark:text-red-400">
+                        {{ \App\Models\Employee::count() }}
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-300"> Employees</span>
+                    </p>
+                </div>
+            </div>
+
         </div>
 
-{{-- Recent Users Table --}}
+        {{-- Recent Users Table --}}
         <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md overflow-auto">
             <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">Latest Registered Users</h2>
             <table class="w-full text-left text-sm text-gray-600 dark:text-gray-300">
@@ -149,12 +220,14 @@
                 </thead>
                 <tbody>
                     @foreach (\App\Models\User::latest()->take(5)->get() as $user)
-                        <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <tr
+                            class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                             <td class="py-2 px-4">{{ $user->name }}</td>
                             <td class="py-2 px-4">{{ $user->email }}</td>
                             <td class="py-2 px-4">
-                                <span class="inline-block px-2 py-1 text-xs rounded-full
-                                    @if($user->status === 'Active') bg-green-100 text-green-800
+                                <span
+                                    class="inline-block px-2 py-1 text-xs rounded-full
+                                    @if ($user->status === 'Active') bg-green-100 text-green-800
                                     @elseif($user->status === 'Pending') bg-yellow-100 text-yellow-800
                                     @elseif($user->status === 'Suspended') bg-red-100 text-red-800
                                     @else bg-gray-100 text-gray-800 @endif">

@@ -6,6 +6,11 @@ use App\Livewire\Admin\Products\ProductIndex;
 use App\Livewire\Admin\Users\UserManager;
 use App\Livewire\Admin\Dealers\DealerManager;
 use App\Livewire\Admin\Stations\StationManager;
+use App\Livewire\Admin\Shifts\ShiftManager;
+use App\Livewire\Admin\Departments\DepartmentManager;
+use App\Livewire\Admin\Designations\DesignationManager;
+use App\Livewire\Admin\Employees\EmployeeManager;
+use App\Livewire\Admin\Pumps\PumpManager;
 
 //normal
 Route::get('/', function () {
@@ -31,6 +36,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/users', UserManager::class)->name('users.index');
             Route::get('/dealers', DealerManager::class)->name('dealers.index');
             Route::get('/stations', StationManager::class)->name('stations.index');
+            Route::get('/shifts', ShiftManager::class)->name('shifts.index');
+            Route::get('/departments', DepartmentManager::class)->name('departments.index');
+            Route::get('/designations', DesignationManager::class)->name('designations.index');
+            Route::get('/employees', EmployeeManager::class)->name('employees.index');
+            Route::get('/pumps', PumpManager::class)->name('pumps.index');
         });
 });
 

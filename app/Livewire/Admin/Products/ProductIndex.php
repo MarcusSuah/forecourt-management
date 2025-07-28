@@ -56,6 +56,7 @@ class ProductIndex extends Component
     {
         Product::findOrFail($this->productId)->delete();
         $this->confirmingDelete = false;
+        session()->flash('message', 'Product deleted successfully.');
     }
 
     public function save()

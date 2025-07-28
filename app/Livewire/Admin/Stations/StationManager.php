@@ -189,6 +189,8 @@ class StationManager extends Component
         $station->delete();
         $this->closeModal();
         $this->stations = ServiceStation::with('dealer')->latest()->get();
+
+        session()->flash('message', 'Station deleted successfully.');
     }
 
     private function resetForm()

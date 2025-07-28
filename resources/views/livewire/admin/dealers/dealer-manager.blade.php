@@ -1,17 +1,16 @@
 <div>
     <div class="p-4 space-y-4">
-        {{-- Flash Message --}}
+
         @if (session()->has('message'))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
                 x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
                 x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
-                class="fixed bottom-4 right-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-green-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
+                class="fixed top-4 middle-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-white-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
                 role="alert">
                 {{ session('message') }}
             </div>
         @endif
-
 
         {{-- Header --}}
         <div class="flex items-center justify-between">
@@ -31,6 +30,7 @@
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="bg-gray-100 dark:bg-gray-800">
                     <tr>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">ID</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Name</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Email
                         </th>
@@ -45,8 +45,11 @@
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($dealers as $dealer)
                         <tr>
-                            <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $dealer->fname }}
-                                {{ $dealer->lname }}
+                            <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">
+                               DLR-0 {{ $dealer->id }}
+                            </td>
+                             <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $dealer->fname }}
+                               {{ $dealer->lname }}
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $dealer->email }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $dealer->phone }}</td>

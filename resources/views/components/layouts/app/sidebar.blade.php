@@ -28,8 +28,28 @@
             </flux:navlist.item>
 
 
-                  <flux:navlist.item icon="home-modern" :href="route('admin.stations.index')"
+            <flux:navlist.item icon="home-modern" :href="route('admin.stations.index')"
                 :current="request()->routeIs('admin.stations.index')" wire:navigate>{{ __('Service Stations') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="clock" :href="route('admin.shifts.index')"
+                :current="request()->routeIs('admin.shifts.index')" wire:navigate>{{ __('Shifts') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="chart-bar" :href="route('admin.departments.index')"
+                :current="request()->routeIs('admin.departments.index')" wire:navigate>{{ __('Departments') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="beaker" :href="route('admin.designations.index')"
+                :current="request()->routeIs('admin.designations.index')" wire:navigate>{{ __('Positions') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="identification" :href="route('admin.employees.index')"
+                :current="request()->routeIs('admin.employees.index')" wire:navigate>{{ __('Employee') }}
+            </flux:navlist.item>
+
+             <flux:navlist.item icon="funnel" :href="route('admin.pumps.index')"
+                :current="request()->routeIs('admin.pumps.index')" wire:navigate>{{ __('Pumps') }}
             </flux:navlist.item>
 
 
@@ -73,7 +93,8 @@
                 <flux:menu.separator />
 
                 <flux:menu.radio.group>
-                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}
+                    <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
+                        {{ __('Settings') }}
                     </flux:menu.item>
                 </flux:menu.radio.group>
 

@@ -33,6 +33,15 @@ class ServiceStation extends Model
     {
         return $this->belongsTo(Dealer::class);
     }
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class, 'station_id');
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 
     /**
      * Accessor for logo URL.

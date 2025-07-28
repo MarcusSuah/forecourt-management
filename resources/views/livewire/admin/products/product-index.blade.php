@@ -1,11 +1,10 @@
 <div>
-
     @if (session()->has('message'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
             x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
             x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
-            class="fixed top-4 middle-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-green-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
+            class="fixed top-4 middle-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-white-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
             role="alert">
             {{ session('message') }}
         </div>
@@ -37,13 +36,11 @@
                     @forelse($products as $product)
                         <tr
                             class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 md:table-row block md:table-row mb-4 rounded-md shadow-sm md:shadow-none">
-                            {{-- ID --}}
+
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white md:table-cell block">
                                 <span class="md:hidden font-semibold">#</span>
-                                PDT - {{ $product->id }}
+                                PDT-0 {{ $product->id }}
                             </td>
-
-                            {{-- Name --}}
                             <td class="px-6 py-4 md:table-cell block">
                                 <span class="md:hidden font-semibold">Name:</span>
                                 {{ $product->name }}
@@ -128,7 +125,7 @@
                         </div>
                         <div class="flex justify-end space-x-2">
                             <button type="button" wire:click="$set('isOpen', false)"
-                                class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                                class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">Cancel</button>
                             <button type="submit"
                                 class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
                         </div>
