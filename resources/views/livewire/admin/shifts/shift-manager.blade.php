@@ -31,14 +31,14 @@
                         <th class="py-2 px-4 text-left">Start Time</th>
                         <th class="py-2 px-4 text-left">End Time</th>
                         <th class="py-2 px-4 text-left">Status</th>
-                        <th class="py-2 px-4 text-right">Actions</th>
+                        <th class="py-2 px-6 text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($shifts as $shift)
                         <tr class="border-b">
                             <td class="py-2 px-4">STA-0{{ $shift->station->id }}</td>
-                              <td class="py-2 px-4">{{ $shift->station->name }}</td>
+                            <td class="py-2 px-4">{{ $shift->station->name }}</td>
                             <td class="py-2 px-4">{{ $shift->name }}</td>
                             <td class="py-2 px-4">{{ \Carbon\Carbon::parse($shift->start_time)->format('H:i') }}</td>
                             <td class="py-2 px-4">{{ \Carbon\Carbon::parse($shift->end_time)->format('H:i') }}</td>
@@ -52,7 +52,7 @@
                                 </span>
                             </td>
                             <td
-                                class="px-6 py-4 text-right space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
+                                class="px-6 py-4 space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
                                 <button wire:click="show({{ $shift->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs font-semibold rounded hover:bg-blue-200 dark:hover:bg-blue-700 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
@@ -94,7 +94,7 @@
 
         {{-- Create/Edit Modal --}}
         @if ($isOpen)
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-lg">
                     <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-600">
                         {{ $shiftId ? 'Edit' : 'Add' }} Shift</h2>
@@ -184,9 +184,9 @@
 
         {{-- Delete Confirmation Modal --}}
         @if ($isDeleteOpen)
-              <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-sm shadow-lg">
-                       <h2 class="text-lg font-semibold mb-4 text-red-600 dark:text-red-400">Confirm Deletion</h2>
+                    <h2 class="text-lg font-semibold mb-4 text-red-600 dark:text-red-400">Confirm Deletion</h2>
                     <p class="mb-4">Are you sure you want to delete this shift?</p>
                     <div class="flex justify-center space-x-4">
                         <button wire:click="deleteShift" class="px-4 py-2 bg-red-600 text-white rounded">Yes</button>

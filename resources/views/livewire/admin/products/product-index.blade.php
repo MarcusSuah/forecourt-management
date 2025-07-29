@@ -28,7 +28,7 @@
                         <th scope="col" class="px-6 py-3">product ID</th>
                         <th scope="col" class="px-6 py-3">Name</th>
                         <th scope="col" class="px-6 py-3">Product Detail</th>
-                        <th scope="col" class="px-6 py-3 text-right">Actions</th>
+                        <th scope="col" class="px-6 py-3">Actions</th>
                     </tr>
                 </thead>
 
@@ -54,7 +54,7 @@
 
                             {{-- Actions --}}
                             <td
-                                class="px-6 py-4 text-right space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
+                                class="px-6 py-4 space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
                                 <button wire:click="openShowModal({{ $product->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs font-semibold rounded hover:bg-blue-200 dark:hover:bg-blue-700 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">

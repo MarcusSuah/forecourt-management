@@ -45,11 +45,23 @@
             </flux:navlist.item>
 
             <flux:navlist.item icon="identification" :href="route('admin.employees.index')"
-                :current="request()->routeIs('admin.employees.index')" wire:navigate>{{ __('Employee') }}
+                :current="request()->routeIs('admin.employees.index')" wire:navigate>{{ __('Employees') }}
             </flux:navlist.item>
 
-             <flux:navlist.item icon="funnel" :href="route('admin.pumps.index')"
+            <flux:navlist.item icon="funnel" :href="route('admin.pumps.index')"
                 :current="request()->routeIs('admin.pumps.index')" wire:navigate>{{ __('Pumps') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="truck" :href="route('admin.tanks.index')"
+                :current="request()->routeIs('admin.tanks.index')" wire:navigate>{{ __('Tanks') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="currency-dollar" :href="route('admin.currencies.index')"
+                :current="request()->routeIs('admin.currencies.index')" wire:navigate>{{ __('Currency') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="shield-check" :href="route('admin.exchange-rates.index')"
+                :current="request()->routeIs('admin.exchange-rates.index')" wire:navigate>{{ __('Exchange Rates') }}
             </flux:navlist.item>
 
 

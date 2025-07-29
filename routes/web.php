@@ -11,6 +11,9 @@ use App\Livewire\Admin\Departments\DepartmentManager;
 use App\Livewire\Admin\Designations\DesignationManager;
 use App\Livewire\Admin\Employees\EmployeeManager;
 use App\Livewire\Admin\Pumps\PumpManager;
+use App\Livewire\Admin\Tanks\TankManager;
+use App\Livewire\Admin\Currencies\CurrencyManager;
+use App\Livewire\Admin\ExchangeRates\ExchangeRateManager;
 
 //normal
 Route::get('/', function () {
@@ -41,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/designations', DesignationManager::class)->name('designations.index');
             Route::get('/employees', EmployeeManager::class)->name('employees.index');
             Route::get('/pumps', PumpManager::class)->name('pumps.index');
+            Route::get('/tanks', TankManager::class)->name('tanks.index');
+            Route::get('/currencies', CurrencyManager::class)->name('currencies.index');
+            Route::get('/exchange-rates', ExchangeRateManager::class)->name('exchange-rates.index');
         });
 });
 

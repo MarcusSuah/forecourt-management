@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('tanks', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('station_id')->constrained('service_stations')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('code')->unique();
+            $table->string('symbol')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanks');
+        Schema::dropIfExists('currencies');
     }
 };

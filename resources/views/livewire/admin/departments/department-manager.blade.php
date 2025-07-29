@@ -1,16 +1,16 @@
 <div>
 
 
-        @if (session()->has('message'))
-            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
-                x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
-                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
-                class="fixed top-4 middle-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-white-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
-                role="alert">
-                {{ session('message') }}
-            </div>
-        @endif
+    @if (session()->has('message'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
+            class="fixed top-4 middle-4 z-50 bg-green-500 border border-green-300 text-white dark:bg-green-800 dark:text-white-500 dark:border-green-600 px-4 py-3 rounded-lg shadow-md"
+            role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <div class="p-4">
         <div class="flex justify-between items-center mb-4">
@@ -47,11 +47,29 @@
                             </td>
                             <td class="px-4 py-2 space-x-2">
                                 <button wire:click="show({{ $department->id }})"
-                                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Show</button>
+                                    class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs font-semibold rounded hover:bg-blue-200 dark:hover:bg-blue-700 transition w-full md:w-auto">
+                                    <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 3.25a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM10 12a2 2 0 110-4 2 2 0 010 4z" />
+                                    </svg>
+
+                                    Show</button>
                                 <button wire:click="edit({{ $department->id }})"
-                                    class="px-3 py-1 text-xs bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200">Edit</button>
+                                    class="inline-flex items-center justify-center px-3 py-1.5 bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100 text-xs font-semibold rounded hover:bg-yellow-200 dark:hover:bg-yellow-600 transition w-full md:w-auto">
+                                    <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M17.414 2.586a2 2 0 00-2.828 0L6 11.172V14h2.828l8.586-8.586a2 2 0 000-2.828z" />
+                                    </svg>
+
+                                    Edit</button>
                                 <button wire:click="confirmDelete({{ $department->id }})"
-                                    class="px-3 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200">Delete</button>
+                                    class="inline-flex items-center justify-center px-3 py-1.5 bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100 text-xs font-semibold rounded hover:bg-red-200 dark:hover:bg-red-600 transition w-full md:w-auto">
+                                    <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M6 4a1 1 0 00-1 1v1H3.5a.5.5 0 000 1h.682l.717 9.037A2 2 0 006.893 18h6.215a2 2 0 001.994-1.963L15.5 7h.682a.5.5 0 000-1H15V5a1 1 0 00-1-1H6zm2 3a.5.5 0 011 0v7a.5.5 0 01-1 0V7zm4 0a.5.5 0 011 0v7a.5.5 0 01-1 0V7z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Delete</button>
                             </td>
                         </tr>
                     @empty

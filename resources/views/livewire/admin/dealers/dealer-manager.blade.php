@@ -38,22 +38,21 @@
                         </th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Status
                         </th>
-                        <th class="px-4 py-2 text-right text-sm font-semibold text-gray-700 dark:text-gray-200">Actions
-                        </th>
+                        <th class="px-4 text-left py-2  text-sm font-semibold text-gray-700 dark:text-gray-200">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($dealers as $dealer)
                         <tr>
                             <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">
-                               DLR-0 {{ $dealer->id }}
+                                DLR-0 {{ $dealer->id }}
                             </td>
-                             <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $dealer->fname }}
-                               {{ $dealer->lname }}
+                            <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $dealer->fname }}
+                                {{ $dealer->lname }}
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $dealer->email }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $dealer->phone }}</td>
-                            <td>
+                            <td class="py-2 px-4">
                                 <span
                                     class="px-2 py-1 text-sm rounded-full
                                             @if ($dealer->status == 'Active') bg-green-100 text-green-600
@@ -67,7 +66,7 @@
 
 
                             <td
-                                class="px-6 py-4 text-right space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
+                                class="px-6 py-4 space-y-2 md:space-y-0 md:space-x-2 flex md:table-cell flex-col md:flex-row md:justify-end">
                                 <button wire:click="show({{ $dealer->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs font-semibold rounded hover:bg-blue-200 dark:hover:bg-blue-700 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">

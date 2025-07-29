@@ -10,13 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('tanks', function (Blueprint $table) {
+        Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('station_id')->constrained('service_stations')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('name');
+
+            $table->foreignId('base_currency_id')->constrained('currencies')->onDelete('cascade');
+            $table->foreignId('target_currency_id')->constrained('currencies')->onDelete('cascade');
+
+            $table->decimal('rate', 10, 4);
+            $table->date('date');
             $table->enum('status', ['active', 'inactive'])->default('active');
+
             $table->timestamps();
+
+            $table->unique(['base_currency_id', 'target_currency_id', 'date']); // optional but useful
         });
     }
 
@@ -25,6 +31,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanks');
+        Schema::dropIfExists('exchange_rates');
     }
 };
