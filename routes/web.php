@@ -12,8 +12,12 @@ use App\Livewire\Admin\Designations\DesignationManager;
 use App\Livewire\Admin\Employees\EmployeeManager;
 use App\Livewire\Admin\Pumps\PumpManager;
 use App\Livewire\Admin\Tanks\TankManager;
+use App\Livewire\Admin\Tanks\DippingManager;
 use App\Livewire\Admin\Currencies\CurrencyManager;
 use App\Livewire\Admin\ExchangeRates\ExchangeRateManager;
+use App\Livewire\Admin\Banks\BankManager;
+use App\Livewire\Admin\UnitPrices\PriceManager;
+use App\Livewire\Admin\MeterCollections\MeterCollectionManager;
 
 //normal
 Route::get('/', function () {
@@ -45,8 +49,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/employees', EmployeeManager::class)->name('employees.index');
             Route::get('/pumps', PumpManager::class)->name('pumps.index');
             Route::get('/tanks', TankManager::class)->name('tanks.index');
+            Route::get('/tanks/dapping-manager', DippingManager::class)->name('dapping-manager.index');
             Route::get('/currencies', CurrencyManager::class)->name('currencies.index');
             Route::get('/exchange-rates', ExchangeRateManager::class)->name('exchange-rates.index');
+            Route::get('/banks', BankManager::class)->name('banks.index');
+            Route::get('/unit-prices', PriceManager::class)->name('unit-prices.index');
+            Route::get('/meter-collections', MeterCollectionManager::class)->name('meter-collections.index');
         });
 });
 

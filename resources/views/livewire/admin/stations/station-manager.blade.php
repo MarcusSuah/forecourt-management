@@ -22,8 +22,9 @@
 
         <!-- Stations Table -->
         <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead class="bg-gray-50 dark:bg-gray-900">
+          <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
+                <thead
+                    class="hidden md:table-header-group text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
                             ID

@@ -12,20 +12,21 @@
         @endif
 
         <div class="flex justify-between items-center mb-4">
-            <h1 class="text-2xl font-bold">Exchange Rate Management</h1>
+            <h1 class="text-2xl font-bold">Unit Price Management</h1>
 
             <button wire:click="create"
                 class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                + Add Exchange Rate
+                + Add Unit Price
             </button>
         </div>
 
         <!-- Filters -->
         <div class="mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Search</label>
-                    <input type="text" wire:model.debounce.300ms="search" placeholder="Search by currency..."
+                    <input type="text" wire:model.debounce.300ms="search"
+                        placeholder="Search by product or station..."
                         class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
                 </div>
                 <div>
@@ -34,12 +35,23 @@
                         class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
-                    <select wire:model="statusFilter"
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Station</label>
+                    <select wire:model="stationFilter"
                         class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
-                        <option value="">All</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
+                        <option value="">All Stations</option>
+                        @foreach ($stations as $station)
+                            <option value="{{ $station->id }}">{{ $station->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product</label>
+                    <select wire:model="productFilter"
+                        class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
+                        <option value="">All Products</option>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="flex items-end">
@@ -66,21 +78,11 @@
                                 @endif
                             @endif
                         </th>
-                        <th class="px-6 py-3">Base Currency</th>
-                        <th class="px-6 py-3">Target Currency</th>
-                        <th class="px-6 py-3 cursor-pointer" wire:click="sortBy('rate')">
-                            Rate
-                            @if ($sortField === 'rate')
-                                @if ($sortDirection === 'asc')
-                                    ↑
-                                @else
-                                    ↓
-                                @endif
-                            @endif
-                        </th>
-                        <th class="px-6 py-3 cursor-pointer" wire:click="sortBy('status')">
-                            Status
-                            @if ($sortField === 'status')
+                        <th class="px-6 py-3">Station</th>
+                        <th class="px-6 py-3">Product</th>
+                        <th class="px-6 py-3 cursor-pointer" wire:click="sortBy('price')">
+                            Price
+                            @if ($sortField === 'price')
                                 @if ($sortDirection === 'asc')
                                     ↑
                                 @else
@@ -92,35 +94,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($exchangeRates as $rate)
+                    @forelse ($unitPrices as $unitPrice)
                         <tr
                             class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 md:table-row block mb-4 rounded-md shadow-sm md:shadow-none">
                             <td class="px-6 py-4 md:table-cell block">
                                 <span class="md:hidden font-semibold">Date:</span>
-                                {{ $rate->date->format('M d, Y \\@ g:i A') }}
+                                {{ $unitPrice->date }}
                             </td>
                             <td class="px-6 py-4 md:table-cell block">
-                                <span class="md:hidden font-semibold">Base Currency:</span>
-                                {{ $rate->baseCurrency->code }} ({{ $rate->baseCurrency->name }})
+                                <span class="md:hidden font-semibold">Station:</span>
+                                {{ $unitPrice->station->name }}
                             </td>
                             <td class="px-6 py-4 md:table-cell block">
-                                <span class="md:hidden font-semibold">Target Currency:</span>
-                                {{ $rate->targetCurrency->code }} ({{ $rate->targetCurrency->name }})
+                                <span class="md:hidden font-semibold">Product:</span>
+                                {{ $unitPrice->product->name }}
                             </td>
                             <td class="px-6 py-4 md:table-cell block">
-                                <span class="md:hidden font-semibold">Rate:</span>
-                                {{ $rate->rate }}
-                            </td>
-                            <td class="px-6 py-4 md:table-cell block">
-                                <span class="md:hidden font-semibold">Status:</span>
-                                <span
-                                    class="px-2 py-1 text-xs rounded-full {{ $rate->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ ucfirst($rate->status) }}
-                                </span>
+                                <span class="md:hidden font-semibold">Price:</span>
+                                {{ number_format($unitPrice->price, 2) }}
                             </td>
                             <td
                                 class="px-6 py-4 flex md:table-cell flex-col md:flex-row md:justify-end space-y-2 md:space-y-0 md:space-x-2">
-                                <button wire:click="show({{ $rate->id }})"
+                                <button wire:click="show({{ $unitPrice->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-200 text-xs font-semibold rounded hover:bg-blue-200 dark:hover:bg-blue-700 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path
@@ -128,7 +123,7 @@
                                     </svg>
                                     Show
                                 </button>
-                                <button wire:click="edit({{ $rate->id }})"
+                                <button wire:click="edit({{ $unitPrice->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100 text-xs font-semibold rounded hover:bg-yellow-200 dark:hover:bg-yellow-600 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path
@@ -136,7 +131,7 @@
                                     </svg>
                                     Edit
                                 </button>
-                                <button wire:click="confirmDelete({{ $rate->id }})"
+                                <button wire:click="confirmDelete({{ $unitPrice->id }})"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100 text-xs font-semibold rounded hover:bg-red-200 dark:hover:bg-red-600 transition w-full md:w-auto">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -149,8 +144,8 @@
                         </tr>
                     @empty
                         <tr class="bg-white dark:bg-gray-800 border-b dark:border-gray-700">
-                            <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
-                                No exchange rates found.
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                                No unit prices found.
                             </td>
                         </tr>
                     @endforelse
@@ -159,7 +154,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $exchangeRates->links() }}
+            {{ $unitPrices->links() }}
         </div>
 
         {{-- Create/Edit Modal --}}
@@ -167,43 +162,43 @@
             <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-lg">
                     <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                        {{ $exchangeRateId ? 'Edit Exchange Rate' : 'Create Exchange Rate' }}
+                        {{ $unitPriceId ? 'Edit Unit Price' : 'Create Unit Price' }}
                     </h2>
                     <form wire:submit.prevent="save">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Base
-                                Currency</label>
-                            <select wire:model="base_currency_id"
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Service
+                                Station</label>
+                            <select wire:model="station_id"
                                 class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="">Select Base Currency</option>
-                                <option value="{{ $usdCurrency->id }}">{{ $usdCurrency->code }}
-                                    ({{ $usdCurrency->name }})</option>
-                            </select>
-                            @error('base_currency_id')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target
-                                Currency</label>
-                            <select wire:model="target_currency_id"
-                                class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="">Select Target Currency</option>
-                                @foreach ($currencies as $currency)
-                                    <option value="{{ $currency->id }}">{{ $currency->code }} ({{ $currency->name }})
-                                    </option>
+                                <option value="">Select Service Station</option>
+                                @foreach ($stations as $station)
+                                    <option value="{{ $station->id }}">{{ $station->name }}</option>
                                 @endforeach
                             </select>
-                            @error('target_currency_id')
+                            @error('station_id')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Exchange
-                                Rate</label>
-                            <input type="number" step="0.01" wire:model="rate"
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product</label>
+                            <select wire:model="product_id"
                                 class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
-                            @error('rate')
+                                <option value="">Select Product</option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('product_id')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Price</label>
+                            <input type="number" step="0.0001" wire:model="price"
+                                class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
+                            @error('price')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -212,18 +207,6 @@
                             <input type="date" wire:model="date"
                                 class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
                             @error('date')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
-                            <select wire:model="status"
-                                class="w-full border rounded px-3 py-2 focus:outline-blue-500 dark:bg-gray-700 dark:text-white">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                            @error('status')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -243,26 +226,17 @@
             <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-lg">
                     <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                        Exchange Rate Details
+                        Unit Price Details
                     </h2>
 
                     <div class="space-y-3 text-gray-800 dark:text-gray-100">
-                        <div><strong>ID:</strong> EXR-0{{ $showData['id'] }}</div>
-                        <div><strong>Base Currency:</strong> {{ $showData['base_currency'] }}</div>
-                        <div><strong>Target Currency:</strong> {{ $showData['target_currency'] }}</div>
-                        <div><strong>Rate:</strong> {{ $showData['rate'] }}</div>
-                       <div>
-    <strong>Date:</strong>
-    {{ \Carbon\Carbon::parse(time: $showData['date'])->format('M d, Y \\@ g:i A') }}
-</div>
-                        <div><strong>Status:</strong>
-                            <span
-                                class="px-2 py-1 text-xs rounded-full {{ $showData['status'] === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                {{ $showData['status'] }}
-                            </span>
-                        </div>
-                        <div><strong>Created:</strong> {{ \Carbon\Carbon::parse($showData['created_at'])->format('M d, Y \\@ g:i A') }}</div>
-                        <div><strong>Updated:</strong> {{ \Carbon\Carbon::parse($showData['updated_at'])->format('M d, Y \\@ g:i A') }}</div>
+                        <div><strong>ID:</strong> {{ $showData['id'] }}</div>
+                        <div><strong>Service Station:</strong> {{ $showData['station'] }}</div>
+                        <div><strong>Product:</strong> {{ $showData['product'] }}</div>
+                        <div><strong>Price:</strong> {{ $showData['price'] }}</div>
+                        <div><strong>Date:</strong> {{ $showData['date'] }}</div>
+                        <div><strong>Created:</strong> {{ $showData['created_at'] }}</div>
+                        <div><strong>Updated:</strong> {{ $showData['updated_at'] }}</div>
                     </div>
 
                     <div class="mt-6 text-right">
@@ -277,11 +251,11 @@
         @if ($deleteModal)
             <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md shadow-lg">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-500">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
                         Confirm Deletion
                     </h2>
-                    <p class="mb-6 text-gray-700 dark:text-gray-300">Are you sure you want to delete this exchange
-                        rate? This action cannot be undone.</p>
+                    <p class="mb-6 text-gray-700 dark:text-gray-300">Are you sure you want to delete this unit price?
+                        This action cannot be undone.</p>
                     <div class="flex justify-end space-x-2">
                         <button type="button" wire:click="$set('deleteModal', false)"
                             class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 dark:bg-gray-600 dark:text-white">Cancel</button>

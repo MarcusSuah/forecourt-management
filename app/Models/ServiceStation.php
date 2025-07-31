@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceStation extends Model
 {
@@ -29,6 +30,10 @@ class ServiceStation extends Model
     /**
      * Relationship: ServiceStation belongs to a Dealer.
      */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
     public function dealer()
     {
         return $this->belongsTo(Dealer::class);
@@ -37,12 +42,18 @@ class ServiceStation extends Model
     {
         return $this->hasMany(Shift::class, 'station_id');
     }
-
+    public function meterCollections(): HasMany
+    {
+        return $this->hasMany(MeterCollection::class);
+    }
     public function employees()
     {
         return $this->hasMany(Employee::class);
     }
-
+    public function pumps(): HasMany
+    {
+        return $this->hasMany(Pump::class);
+    }
     /**
      * Accessor for logo URL.
      * Returns full URL or null if no logo.

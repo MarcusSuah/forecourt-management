@@ -10,13 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('shifts', function (Blueprint $table) {
+        Schema::create('unit_prices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('station_id')->constrained('service_stations')->onDelete('cascade');
-            $table->string('name')->unique();
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->decimal('price', 10, 2);
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('shifts');
+        Schema::dropIfExists('unit_prices');
     }
 };

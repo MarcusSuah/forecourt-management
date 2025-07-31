@@ -21,4 +21,8 @@ class Dealer extends Model
         'address',
         'status'
     ];
+       protected $casts = [
+        'dob' => 'date',
+    ];
+
 }

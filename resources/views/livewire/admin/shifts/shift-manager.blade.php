@@ -102,7 +102,7 @@
                         <div class="mb-4">
                             <label class="block mb-1">Station</label>
                             <select wire:model.defer="station_id"
-                                class="w-full border  text-gray-800 dark:text-gray-600 px-3 py-2 rounded @error('station_id') border-red-500 @enderror">
+                                class="w-full border  text-gray-300 px-3 py-2 focus:ring-2 dark:bg-gray-900 rounded @error('station_id') border-red-500 @enderror">
                                 <option value="">-- Select Station --</option>
                                 @foreach ($stations as $station)
                                     <option value="{{ $station->id }}">{{ $station->name }}</option>
@@ -116,7 +116,7 @@
                         <div class="mb-4">
                             <label class="block mb-1">Shift Name</label>
                             <input type="text" wire:model.defer="name"
-                                class="w-full text-gray-800 dark:text-gray-600 border px-3 py-2 rounded @error('name') border-red-500 @enderror">
+                                class="w-full text-gray-300 border px-3 py-2 focus:ring-2 dark:bg-gray-900 rounded @error('name') border-red-500 @enderror">
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
@@ -126,7 +126,7 @@
                             <div>
                                 <label class="block mb-1">Start Time</label>
                                 <input type="time" wire:model.defer="start_time"
-                                    class="w-full border  text-gray-800 dark:text-gray-600 px-3 py-2 rounded @error('start_time') border-red-500 @enderror">
+                                    class="w-full border  text-gray-300 px-3 py-2 focus:ring-2 dark:bg-gray-900 rounded @error('start_time') border-red-500 @enderror">
                                 @error('start_time')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -134,7 +134,7 @@
                             <div>
                                 <label class="block mb-1">End Time</label>
                                 <input type="time" wire:model.defer="end_time"
-                                    class="w-full  text-gray-800 dark:text-gray-600 border px-3 py-2 rounded @error('end_time') border-red-500 @enderror">
+                                    class="w-full  text-gray-300 border px-3 py-2 focus:ring-2 dark:bg-gray-900 rounded @error('end_time') border-red-500 @enderror">
                                 @error('end_time')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
@@ -144,7 +144,7 @@
                         <div class="mb-4">
                             <label class="block mb-1">Status</label>
                             <select wire:model.defer="status"
-                                class="w-full  text-gray-800 dark:text-gray-600 border px-3 py-2 rounded @error('status') border-red-500 @enderror">
+                                class="w-full  text-gray-300 border px-3 py-2 focus:ring-2 dark:bg-gray-900 rounded @error('status') border-red-500 @enderror">
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>

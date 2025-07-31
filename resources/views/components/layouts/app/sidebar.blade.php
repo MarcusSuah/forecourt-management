@@ -55,6 +55,9 @@
             <flux:navlist.item icon="truck" :href="route('admin.tanks.index')"
                 :current="request()->routeIs('admin.tanks.index')" wire:navigate>{{ __('Tanks') }}
             </flux:navlist.item>
+              <flux:navlist.item icon="paint-brush" :href="route('admin.dapping-manager.index')"
+                :current="request()->routeIs('admin.dapping-manager.index')" wire:navigate>{{ __('Tank Dipping') }}
+            </flux:navlist.item>
 
             <flux:navlist.item icon="currency-dollar" :href="route('admin.currencies.index')"
                 :current="request()->routeIs('admin.currencies.index')" wire:navigate>{{ __('Currency') }}
@@ -63,6 +66,20 @@
             <flux:navlist.item icon="shield-check" :href="route('admin.exchange-rates.index')"
                 :current="request()->routeIs('admin.exchange-rates.index')" wire:navigate>{{ __('Exchange Rates') }}
             </flux:navlist.item>
+
+            <flux:navlist.item icon="banknotes" :href="route('admin.banks.index')"
+                :current="request()->routeIs('admin.banks.index')" wire:navigate>{{ __('Banks') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="qr-code" :href="route('admin.unit-prices.index')"
+                :current="request()->routeIs('admin.unit-prices.index')" wire:navigate>{{ __('Unit Price') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="qr-code" :href="route('admin.meter-collections.index')"
+                :current="request()->routeIs('admin.meter-collections.index')" wire:navigate>{{ __('Meter Collections') }}
+            </flux:navlist.item>
+
+
 
 
             <flux:navlist.group :heading="__('Platform')" class="grid">

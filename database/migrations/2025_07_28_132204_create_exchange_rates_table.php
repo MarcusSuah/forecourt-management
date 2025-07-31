@@ -16,13 +16,13 @@ return new class extends Migration {
             $table->foreignId('base_currency_id')->constrained('currencies')->onDelete('cascade');
             $table->foreignId('target_currency_id')->constrained('currencies')->onDelete('cascade');
 
-            $table->decimal('rate', 10, 4);
+            $table->decimal('rate', 10, 2);
             $table->date('date');
             $table->enum('status', ['active', 'inactive'])->default('active');
 
             $table->timestamps();
 
-            $table->unique(['base_currency_id', 'target_currency_id', 'date']); // optional but useful
+            $table->unique(['base_currency_id', 'target_currency_id', 'date']);
         });
     }
 

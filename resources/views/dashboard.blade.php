@@ -181,7 +181,7 @@
                 </div>
             </div>
 
-
+            {{-- Recent Employee Table --}}
             <div
                 class="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
                 <!-- Icon -->
@@ -200,6 +200,29 @@
                     <p class="text-2xl font-bold text-red-500 dark:text-red-400">
                         {{ \App\Models\Employee::count() }}
                         <span class="text-base font-medium text-gray-500 dark:text-gray-300"> Employees</span>
+                    </p>
+                </div>
+            </div>
+
+               {{-- Recent Employee Table --}}
+            <div
+                class="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+                <!-- Icon -->
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-cyan-600 dark:bg-cyan-900 dark:text-red-300">
+                    <!-- Box icon (Heroicons - outline) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4m16 0l-8 8m8-8l-8-8" />
+                    </svg>
+                </div>
+
+                <!-- Text Content -->
+                <div>
+                    <h3 class="text-sm text-gray-500 dark:text-gray-400">Total Banks</h3>
+                    <p class="text-2xl font-bold text-red-500 dark:text-red-400">
+                        {{ \App\Models\Bank::count() }}
+                        <span class="text-base font-medium text-gray-500 dark:text-gray-300"> Banks</span>
                     </p>
                 </div>
             </div>
