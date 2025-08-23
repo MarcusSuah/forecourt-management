@@ -4,7 +4,9 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Models\Login;
+use App\Models\LoginLog;
+use Illuminate\Auth\Events\Login;
+
 class LogUserLogin
 {
     /**
@@ -19,7 +21,7 @@ class LogUserLogin
      * Handle the event.
      */
 
-    public function handle(Login $event)
+    public function handle($event)
     {
         $request = request();
 
