@@ -37,6 +37,19 @@ test('users can not authenticate with invalid password', function () {
     $this->assertGuest();
 });
 
+test('login event is logged', function () {
+    $user = User::factory()->create();
+
+    LivewireVolt::test('auth.login')
+        ->set('email', $user->email)
+        ->set('password', 'password')
+        ->call('login');
+
+    $this->assertDatabaseHas('login_logs', [
+        'user_id' => $user->id,
+    ]);
+});
+
 test('users can logout', function () {
     $user = User::factory()->create();
 
